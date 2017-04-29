@@ -7,11 +7,11 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-## Setup
-<p>#1 composer install</p>
-<p>#2 cp .env.example .env</p>
-<p>#3 chmod -Rf 777 storage/ bootstrap/cache/</p>
-<p>#4 npm install</p>
+## Demo
+
+* [Pusher.js](https://pusher.com/)
+* [Laravel-Echo-Server](https://github.com/tlaverdure/laravel-echo-server)
+* [Socket.io + Redis](http://blog.liaosankai.com/2016/09/05/Laravel%20Echo%20%E6%A6%82%E8%BF%B0%E7%AF%87/) 
 
 ## About Laravel
 
