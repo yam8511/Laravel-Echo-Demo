@@ -9,6 +9,11 @@
 
                 <div class="panel-body">
                     You are logged in!
+                    <input type="text" v-model="newMsg" @keyup.enter="go">
+                    <button @click="leave">Leave</button>
+                    <ul>
+                        <li v-for="msg in msgs">@{{ msg.id }} -> @{{ msg.msg }}</li>
+                    </ul>
                 </div>
             </div>
         </div>

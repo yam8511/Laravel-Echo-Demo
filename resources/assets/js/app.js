@@ -18,5 +18,46 @@ window.Vue = require('vue');
 Vue.component('example', require('./components/Example.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    data: {
+    	user: {},
+        msgs: [],
+        newMsg: ''
+    },
+    methods: {
+    	go() {
+    		this.check();
+    		axios.get('/go?msg=' + this.newMsg).then(function(data) {
+    			console.info(data);
+    		}).catch(function() {
+    			window.alert('go failed');
+    		});
+	    	this.newMsg = '';
+    	},
+    	leave() {
+    		Echo.leave('chatroom');
+    	},
+    	check() {
+	    	console.warn('id', Echo.socketId());
+    	}
+    },
+    mounted() {
+    	console.info('start');
+    	Echo.private('chatroom.1')
+            // .here((users) => {
+            //     console.log('here', users);
+            //     this.usersInRoom = users;
+            // })
+            // .joining((user) => {
+            //     console.info('join', user);
+            //     this.usersInRoom.push(user);
+            // })
+            // .leaving((user) => {
+            //     console.warn('leave', user);
+            //     this.usersInRoom = this.usersInRoom.filter(u => u != user)
+            // })
+            .listen('MessagePosted', (msg) => {
+            	this.msgs.push(msg);
+            });
+    }
 });
