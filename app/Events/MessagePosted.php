@@ -33,7 +33,7 @@ class MessagePosted implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('chatroom.1');
+        return new PresenceChannel('chatroom');
     }
 
     public function broadcastWith()

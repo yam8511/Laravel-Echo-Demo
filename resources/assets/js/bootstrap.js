@@ -32,12 +32,17 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 import Echo from 'laravel-echo'
 
-window.Pusher = require('pusher-js');
+// window.Pusher = require('pusher-js');
 
 /**
  * Pusher
  */
+// window.Echo = new Echo({
+//     broadcaster: 'pusher',
+//     key: '5a77802c8c5e0a0fbc4d'
+// });
+
 window.Echo = new Echo({
-    broadcaster: 'pusher',
-    key: '5a77802c8c5e0a0fbc4d'
+    broadcaster: 'socket.io',
+    host: window.location.hostname + ':6001'
 });

@@ -1,0 +1,28 @@
+{
+	"authHost": "http://zuolar.echo",
+	"authEndpoint": "/broadcasting/auth",
+	"clients": [
+		{
+			"appId": "95537fb2c2853e31",
+			"key": "6752d6bc5590dbd8448077dd118334e8"
+		},
+		{
+			"appId": "zuolar",
+			"key": "a2adbe4f4754e098ef3f3c596be6d307"
+		}
+	],
+	"database": "redis",
+	"databaseConfig": {
+		"redis": {},
+		"sqlite": {
+			"databasePath": "/database/laravel-echo-server.sqlite"
+		}
+	},
+	"devMode": true,
+	"host": null,
+	"port": "6001",
+	"protocol": "http",
+	"socketio": {},
+	"sslCertPath": "",
+	"sslKeyPath": ""
+}

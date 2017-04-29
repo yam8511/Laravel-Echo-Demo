@@ -43,19 +43,19 @@ const app = new Vue({
     },
     mounted() {
     	console.info('start');
-    	Echo.private('chatroom.1')
-            // .here((users) => {
-            //     console.log('here', users);
-            //     this.usersInRoom = users;
-            // })
-            // .joining((user) => {
-            //     console.info('join', user);
-            //     this.usersInRoom.push(user);
-            // })
-            // .leaving((user) => {
-            //     console.warn('leave', user);
-            //     this.usersInRoom = this.usersInRoom.filter(u => u != user)
-            // })
+    	Echo.join('chatroom')
+            .here((users) => {
+                console.log('here', users);
+                this.usersInRoom = users;
+            })
+            .joining((user) => {
+                console.info('join', user);
+                this.usersInRoom.push(user);
+            })
+            .leaving((user) => {
+                console.warn('leave', user);
+                this.usersInRoom = this.usersInRoom.filter(u => u != user)
+            })
             .listen('MessagePosted', (msg) => {
             	this.msgs.push(msg);
             });
