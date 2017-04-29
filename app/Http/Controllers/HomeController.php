@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Events\MessagePosted;
+use App\Events\RedisBroadcast;
 
 class HomeController extends Controller
 {
@@ -29,7 +30,20 @@ class HomeController extends Controller
 
     public function go()
     {
-        broadcast(new MessagePosted(request()->input('msg')));
+        event(new RedisBroadcast('chatroom', [
+            'id' => time(),
+            'msg' => request()->input('msg'),
+        ]));
+        // broadcast(new MessagePosted(request()->input('msg')));
+        return response('ok');
+    }
+
+    public function pub()
+    {
+        event(new RedisBroadcast('hi', [
+            'id' => time(),
+            'msg' => request()->input('msg'),
+        ]));
         return response('ok');
     }
 }

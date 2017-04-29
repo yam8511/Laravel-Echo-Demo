@@ -17,12 +17,15 @@ window.Vue = require('vue');
 
 Vue.component('example', require('./components/Example.vue'));
 
+// var socket = require('socket.io-client')(window.location.hostname + '');
+
 const app = new Vue({
     el: '#app',
     data: {
     	user: {},
         msgs: [],
-        newMsg: ''
+        newMsg: '',
+        // socket: null
     },
     methods: {
     	go() {
@@ -35,29 +38,37 @@ const app = new Vue({
 	    	this.newMsg = '';
     	},
     	leave() {
-    		Echo.leave('chatroom');
+    		// Echo.leave('chatroom');
     	},
     	check() {
-	    	console.warn('id', Echo.socketId());
+	    	// console.warn('id', Echo.socketId());
+	    	console.warn('id', this.socket.id);
     	}
     },
     mounted() {
     	console.info('start');
-    	Echo.join('chatroom')
-            .here((users) => {
-                console.log('here', users);
-                this.usersInRoom = users;
-            })
-            .joining((user) => {
-                console.info('join', user);
-                this.usersInRoom.push(user);
-            })
-            .leaving((user) => {
-                console.warn('leave', user);
-                this.usersInRoom = this.usersInRoom.filter(u => u != user)
-            })
-            .listen('MessagePosted', (msg) => {
-            	this.msgs.push(msg);
-            });
+ 		const socket = require('socket.io-client')(window.location.hostname + ':6001');
+   		this.socket = socket;
+   		const vm = this;
+		this.socket.on('chatroom', function(data) {
+			vm.msgs.push(data);
+		});
+
+    	// Echo.join('chatroom')
+     //        .here((users) => {
+     //            console.log('here', users);
+     //            this.usersInRoom = users;
+     //        })
+     //        .joining((user) => {
+     //            console.info('join', user);
+     //            this.usersInRoom.push(user);
+     //        })
+     //        .leaving((user) => {
+     //            console.warn('leave', user);
+     //            this.usersInRoom = this.usersInRoom.filter(u => u != user)
+     //        })
+     //        .listen('MessagePosted', (msg) => {
+     //        	this.msgs.push(msg);
+     //        });
     }
 });
